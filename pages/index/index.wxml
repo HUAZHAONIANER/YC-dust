@@ -1,0 +1,26 @@
+<view class="index-container">
+  <text class="welcome-text" style="opacity:{{welcomeOpacity}}">{{currentWelcome}}</text>
+  
+  <view class="nav-buttons">
+    <navigator 
+      url="/pages/add/add" 
+      class="nav-btn pink-gradient" 
+      bindtap="navHandler"
+      data-url="/pages/add/add"
+    >💄 添加新化妆品</navigator>
+    
+    <navigator 
+      url="/pages/history/history" 
+      class="nav-btn purple-gradient" 
+      bindtap="navHandler"
+      data-url="/pages/history/history"
+    >📖 产品档案库</navigator>
+    
+    <navigator 
+      url="/pages/reminder/reminder" 
+      class="nav-btn coral-gradient" 
+      bindtap="navHandler"
+      data-url="/pages/reminder/reminder"
+    >⏰ 保鲜提醒</navigator>
+  </view>
+</view>

@@ -1,0 +1,50 @@
+/* 新增样式 */
+.product-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+
+.brand {
+  color: #ff7eb4;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.category {
+  background: #f8f4ff;
+  color: #a371d6;
+  padding: 8rpx 20rpx;
+  border-radius: 40rpx;
+  font-size: 24rpx;
+}
+
+.date-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20rpx;
+  margin-top: 30rpx;
+}
+
+.date-item {
+  background: #fafafa;
+  border-radius: 16rpx;
+  padding: 20rpx;
+}
+
+.label {
+  display: block;
+  color: #999;
+  font-size: 24rpx;
+  margin-bottom: 10rpx;
+}
+
+.value {
+  color: #666;
+  font-size: 28rpx;
+}
+
+.urgent {
+  color: #ff757f !important;
+  font-weight: bold;
+}

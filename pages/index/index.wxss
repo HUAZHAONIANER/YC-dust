@@ -1,0 +1,62 @@
+.index-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40rpx;
+  background: linear-gradient(135deg, #fff0f5 0%, #ffe4e9 100%);
+}
+
+.welcome-text {
+  font-size: 42rpx;
+  color: #ff5499;
+  margin: 60rpx 0;
+  text-align: center;
+  transition: opacity 0.6s ease;
+  text-shadow: 0 4rpx 8rpx rgba(255, 84, 153, 0.2);
+}
+
+.nav-buttons {
+  width: 100%;
+  margin-top: 80rpx;
+}
+
+.nav-btn {
+  width: 90%;
+  height: 160rpx;
+  margin: 30rpx auto;
+  border-radius: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34rpx;
+  color: #fff;
+  box-shadow: 0 10rpx 30rpx rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.3),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.nav-btn:hover::after {
+  left: 100%;
+}
+
+.pink-gradient { background: linear-gradient(135deg, #ff7eb4, #ff65a3); }
+.purple-gradient { background: linear-gradient(135deg, #c792ea, #a371d6); }
+.coral-gradient { background: linear-gradient(135deg, #ff8c94, #ff757f); }

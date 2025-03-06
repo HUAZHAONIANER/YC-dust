@@ -1,0 +1,60 @@
+<view class="add-container">
+  <view class="form-card">
+    <!-- 原有产品名称 -->
+    <input 
+      class="form-input" 
+      placeholder="💄 产品名称" 
+      bindinput="onNameInput"
+    />
+
+    <!-- 新增品牌输入 -->
+    <input
+      class="form-input"
+      placeholder="🏷️ 品牌名称"
+      bindinput="onBrandInput"
+    />
+
+    <!-- 种类选择器 -->
+    <picker 
+      mode="selector" 
+      range="{{categories}}"
+      bindchange="onCategoryChange"
+      class="category-picker"
+    >
+      <view class="picker-text">
+        📦 {{selectedCategory || "选择产品种类"}}
+      </view>
+    </picker>
+
+    <!-- 启封日期 -->
+    <picker
+      mode="date"
+      bindchange="onOpenDateChange"
+      class="date-picker"
+    >
+      <view class="picker-text">
+        📅 {{openDate || "选择启封日期"}}
+      </view>
+    </picker>
+
+    <!-- 保质期输入 -->
+    <view class="shelf-life">
+      <input
+        type="number"
+        class="shelf-input"
+        placeholder="⏳ 开封后保质期（月）"
+        bindinput="onShelfLifeInput"
+      />
+      <text class="unit">个月</text>
+    </view>
+
+    <!-- 保存按钮 -->
+    <button 
+      class="save-btn" 
+      bindtap="saveProduct"
+      hover-class="btn-hover"
+    >
+      💾 保存美丽档案
+    </button>
+  </view>
+</view>

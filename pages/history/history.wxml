@@ -1,0 +1,26 @@
+<view class="history-container">
+  <block wx:for="{{products}}" wx:key="index">
+    <view class="product-card">
+      <view class="product-header">
+        <text class="brand">{{item.brand}}</text>
+        <text class="category">{{item.category}}</text>
+      </view>
+      <text class="product-name">💄 {{item.name}}</text>
+      
+      <view class="date-grid">
+        <view class="date-item">
+          <text class="label">启封日期</text>
+          <text class="value">{{item.openDate}}</text>
+        </view>
+        <view class="date-item">
+          <text class="label">保质期</text>
+          <text class="value">{{item.shelfLife}}个月</text>
+        </view>
+        <view class="date-item">
+          <text class="label">过期日期</text>
+          <text class="value urgent">{{item.expiryDate}}</text>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

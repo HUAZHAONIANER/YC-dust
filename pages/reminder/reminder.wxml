@@ -1,0 +1,22 @@
+<view class="reminder-container">
+  <block wx:for="{{expiringProducts}}" wx:key="index">
+    <view class="reminder-card {{item.daysLeft < 7 ? 'urgent' : ''}}">
+      <view class="product-header">
+        <text class="brand">{{item.brand}}</text>
+        <text class="category">{{item.category}}</text>
+      </view>
+      <text class="product-name">⚠️ {{item.name}}</text>
+      
+      <view class="reminder-info">
+        <view class="info-item">
+          <text>启封日期: {{item.openDate}}</text>
+          <text>剩余: {{item.daysLeft}}天</text>
+        </view>
+        <view class="info-item">
+          <text>过期日期: {{item.expiryDate}}</text>
+          <text>已使用: {{item.usedDays}}天</text>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

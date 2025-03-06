@@ -1,0 +1,31 @@
+.reminder-container {
+  padding: 40rpx;
+  background: linear-gradient(135deg, #fff0f0, #ffe6e6);
+  min-height: 100vh;
+}
+
+.reminder-card {
+  background: white;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 5rpx 15rpx rgba(255, 117, 127, 0.1);
+}
+
+.reminder-card.urgent {
+  background: #fff0f5;
+  border-left: 8rpx solid #ff757f;
+}
+
+.product-name {
+  color: #ff757f;
+  font-size: 32rpx;
+  margin-bottom: 15rpx;
+}
+
+.reminder-info {
+  display: flex;
+  justify-content: space-between;
+  color: #666;
+  font-size: 28rpx;
+}

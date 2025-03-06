@@ -1,0 +1,28 @@
+/* 新增样式 */
+.form-input{
+  margin-top: 40rpx;
+}
+
+.category-picker {
+  margin-top: 40rpx;
+}
+
+.shelf-life {
+  display: flex;
+  align-items: center;
+  margin: 40rpx 0;
+  border-bottom: 3rpx solid #eee;
+}
+
+.shelf-input {
+  flex: 1;
+  height: 200rpx;
+  font-size: 32rpx;
+  color: #ff5499;
+}
+
+.unit {
+  color: #999;
+  font-size: 28rpx;
+  margin-left: 20rpx;
+}

@@ -1,0 +1,14 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/add/add",
+    "pages/history/history",
+    "pages/reminder/reminder"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#E6B0AA",
+    "navigationBarTitleText": "化妆品管理",
+    "navigationBarTextStyle": "white"
+  }
+}
