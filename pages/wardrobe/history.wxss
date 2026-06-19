@@ -28,20 +28,15 @@
 /* 搜索和筛选 */
 .search-filter-bar {
   padding: 30rpx 40rpx 20rpx;
-  display: flex;
-  gap: 20rpx;
-  align-items: center;
 }
 
 .search-box {
-  flex: 1;
   position: relative;
 }
 
 .search-input {
-  width: 100%;
   height: 80rpx;
-  padding: 0 5rpx 0 15rpx;
+  padding: 0 80rpx 0 30rpx;
   background: white;
   border-radius: 40rpx;
   font-size: 28rpx;
@@ -57,8 +52,18 @@
   font-size: 32rpx;
 }
 
+/* 筛选容器 */
+.filter-container {
+  padding: 0 40rpx 20rpx;
+}
+
+.filter-row {
+  display: flex;
+  gap: 20rpx;
+}
+
 .filter-picker {
-  flex-shrink: 0;
+  flex: 1;
 }
 
 .filter-btn {
@@ -75,66 +80,135 @@
   white-space: nowrap;
 }
 
-/* 统计卡片 */
-.stats-card {
-  display: flex;
+/* 统计信息 */
+.stats-section {
   background: white;
   margin: 0 40rpx 30rpx;
   padding: 30rpx;
   border-radius: 20rpx;
   box-shadow: 0 4rpx 15rpx rgba(0,0,0,0.1);
-  justify-content: space-around;
 }
 
-.stats-item {
+.stats-header {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
+  margin-bottom: 30rpx;
 }
 
-.stats-number {
-  font-size: 36rpx;
+.stats-title {
+  font-size: 32rpx;
   font-weight: bold;
-  color: #ff5499;
-  margin-bottom: 8rpx;
+  color: #333;
 }
 
-.stats-label {
-  font-size: 24rpx;
+.stats-count {
+  font-size: 28rpx;
+  color: #9b5de5;
+  font-weight: bold;
+}
+
+.stats-category {
+  margin-bottom: 30rpx;
+}
+
+.stats-category:last-child {
+  margin-bottom: 0;
+}
+
+.stats-subtitle {
+  display: block;
+  font-size: 26rpx;
   color: #666;
+  margin-bottom: 20rpx;
+  font-weight: bold;
 }
 
-/* 产品列表 */
-.products-list {
+.category-tags, .color-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15rpx;
+}
+
+.category-tag, .color-tag {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  padding: 15rpx 20rpx;
+  background: #f5f0ff;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  color: #333;
+}
+
+.color-tag {
+  color: white;
+  text-shadow: 0 2rpx 4rpx rgba(0,0,0,0.2);
+}
+
+.tag-name {
+  font-weight: bold;
+}
+
+.tag-count {
+  background: white;
+  color: #9b5de5;
+  padding: 4rpx 12rpx;
+  border-radius: 10rpx;
+  font-size: 22rpx;
+  font-weight: bold;
+}
+
+.color-tag .tag-count {
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
+}
+
+/* 衣物列表 */
+.clothes-list {
+  width: 680rpx;
   height: calc(100vh - 400rpx);
   padding: 0 40rpx 40rpx;
 }
 
-.product-card {
+.clothing-card {
   background: white;
   border-radius: 25rpx;
   margin-bottom: 30rpx;
-  width: 670rpx;
   box-shadow: 0 8rpx 30rpx rgba(0,0,0,0.1);
   overflow: hidden;
   transition: all 0.3s ease;
 }
 
-.product-card:active {
+.clothing-card:active {
   transform: translateY(-4rpx);
   box-shadow: 0 12rpx 40rpx rgba(0,0,0,0.15);
 }
 
-/* 产品图片 */
-.product-image-section {
+/* 衣物图片 */
+.clothing-image-section {
   position: relative;
   height: 300rpx;
   background: #f8f9fa;
 }
 
-.product-image {
+.clothing-image {
   width: 100%;
   height: 100%;
+}
+
+.default-image {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f5f0ff, #e9e0ff);
+}
+
+.default-icon {
+  font-size: 100rpx;
+  color: #9b5de5;
 }
 
 .image-overlay {
@@ -150,34 +224,25 @@
   padding: 20rpx;
 }
 
-.category-tag {
-  background: rgba(255, 84, 153, 0.9);
+.category-tag, .season-tag {
   color: white;
   padding: 8rpx 20rpx;
   border-radius: 20rpx;
   font-size: 24rpx;
   font-weight: bold;
+  background: rgba(155, 93, 229, 0.9);
 }
 
-.expiry-badge {
-  color: white;
-  padding: 8rpx 16rpx;
-  border-radius: 15rpx;
-  font-size: 22rpx;
-  font-weight: bold;
+.season-tag {
+  background: rgba(77, 150, 255, 0.9);
 }
 
-.expiry-badge.expired { background: #ff6b6b; }
-.expiry-badge.urgent { background: #ffa94d; }
-.expiry-badge.warning { background: #ffd43b; color: #333; }
-.expiry-badge.normal { background: #51cf66; }
-
-/* 产品内容 */
-.product-content {
-  padding: 60rpx;
+/* 衣物内容 */
+.clothing-content {
+  padding: 40rpx;
 }
 
-.product-header {
+.clothing-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -196,50 +261,23 @@
   margin-bottom: 8rpx;
 }
 
-.category {
+.color {
   display: block;
   font-size: 26rpx;
-  color: #666;
-  background: #f8f9fa;
+  font-weight: bold;
   padding: 4rpx 12rpx;
   border-radius: 12rpx;
+  background: #f8f9fa;
   display: inline-block;
 }
 
-.days-left {
-  font-size: 32rpx;
-  font-weight: bold;
-  padding: 8rpx 16rpx;
-  border-radius: 15rpx;
-  background: #f8f9fa;
-}
-
-.days-left.expired { color: #ff6b6b; background: #fff5f5; }
-.days-left.urgent { color: #ffa94d; background: #fff9f0; }
-.days-left.warning { color: #ffd43b; background: #fffce8; }
-.days-left.normal { color: #51cf66; background: #f0fff4; }
-
-.product-name {
-  display: block;
-  font-size: 32rpx;
-  color: #ff5499;
-  font-weight: 600;
-  margin-bottom: 15rpx;
-}
-
-.product-details {
-  margin-bottom: 25rpx;
-}
-
-.product-series, .product-shade {
-  display: block;
+.purchase-date {
+  font-size: 26rpx;
   color: #666;
-  font-size: 28rpx;
-  margin: 5rpx 0;
 }
 
-/* 日期信息 */
-.date-info {
+/* 衣物详情 */
+.clothing-details {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20rpx;
@@ -249,34 +287,30 @@
   border-radius: 15rpx;
 }
 
-.date-item {
+.detail-item {
   display: flex;
   flex-direction: column;
 }
 
-.date-label {
+.detail-label {
   font-size: 24rpx;
   color: #999;
   margin-bottom: 8rpx;
 }
 
-.date-value {
+.detail-value {
   font-size: 28rpx;
   color: #333;
   font-weight: 500;
-}
-
-.expiry-date {
-  font-weight: bold;
 }
 
 /* 备注 */
 .note-section {
   margin-bottom: 25rpx;
   padding: 25rpx;
-  background: #f0fff4;
+  background: #f0f4ff;
   border-radius: 15rpx;
-  border-left: 6rpx solid #51cf66;
+  border-left: 6rpx solid #4d96ff;
 }
 
 .note-label {
@@ -381,11 +415,11 @@
 .empty-btn {
   display: inline-block;
   padding: 25rpx 50rpx;
-  background: linear-gradient(135deg, #ff7eb4, #ff65a3);
+  background: linear-gradient(135deg, #9b5de5, #7b3de0);
   color: white;
   border-radius: 35rpx;
   font-size: 30rpx;
-  box-shadow: 0 8rpx 25rpx rgba(255, 84, 153, 0.3);
+  box-shadow: 0 8rpx 25rpx rgba(155, 93, 229, 0.3);
 }
 
 /* 悬浮按钮 */
@@ -398,18 +432,18 @@
 
 .fab-btn {
   height: 80rpx;
-  background: linear-gradient(135deg, #ff7eb4, #ff65a3);
+  background: linear-gradient(135deg, #9b5de5, #7b3de0);
   border-radius: 60rpx;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 10rpx 30rpx rgba(255, 84, 153, 0.4);
+  box-shadow: 0 10rpx 30rpx rgba(155, 93, 229, 0.4);
   transition: all 0.3s ease;
 }
 
 .fab-btn:active {
   transform: scale(0.9);
-  box-shadow: 0 15rpx 40rpx rgba(255, 84, 153, 0.6);
+  box-shadow: 0 15rpx 40rpx rgba(155, 93, 229, 0.6);
 }
 
 .fab-icon {

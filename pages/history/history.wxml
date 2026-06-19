@@ -1,26 +1,149 @@
 <view class="history-container">
-  <block wx:for="{{products}}" wx:key="index">
-    <view class="product-card">
-      <view class="product-header">
-        <text class="brand">{{item.brand}}</text>
-        <text class="category">{{item.category}}</text>
-      </view>
-      <text class="product-name">💄 {{item.name}}</text>
-      
-      <view class="date-grid">
-        <view class="date-item">
-          <text class="label">启封日期</text>
-          <text class="value">{{item.openDate}}</text>
-        </view>
-        <view class="date-item">
-          <text class="label">保质期</text>
-          <text class="value">{{item.shelfLife}}个月</text>
-        </view>
-        <view class="date-item">
-          <text class="label">过期日期</text>
-          <text class="value urgent">{{item.expiryDate}}</text>
-        </view>
-      </view>
+  <!-- 顶部标题 -->
+  <view class="page-header">
+    <text class="page-title">📚 产品档案库</text>
+    <text class="page-subtitle">管理您的美丽收藏</text>
+  </view>
+  
+  <!-- 搜索和筛选栏 -->
+  <view class="search-filter-bar">
+    <view class="search-box">
+      <input
+        class="search-input"
+        placeholder="🔍 搜索品牌、产品名称..."
+        bindinput="onSearchInput"
+        value="{{searchKeyword}}"
+      />
+      <text class="search-clear" wx:if="{{searchKeyword}}" bindtap="clearSearch">×</text>
     </view>
-  </block>
+    <view class="filter-section">
+      <picker 
+        mode="selector" 
+        range="{{categories}}"
+        bindchange="onFilterChange"
+        value="{{pickerCategoryIndex}}"
+        class="filter-picker"
+      >
+        <view class="filter-btn">
+          🎛️ {{filterCategory || "全部类别"}}
+        </view>
+      </picker>
+    </view>
+  </view>
+  
+  <!-- 产品统计 -->
+  <view class="stats-card">
+    <view class="stats-item">
+      <text class="stats-number">{{totalCount}}</text>
+      <text class="stats-label">总产品数</text>
+    </view>
+    <view class="stats-item">
+      <text class="stats-number">{{expiringCount}}</text>
+      <text class="stats-label">即将过期</text>
+    </view>
+    <view class="stats-item">
+      <text class="stats-number">{{urgentCount}}</text>
+      <text class="stats-label">紧急提醒</text>
+    </view>
+  </view>
+  
+  <!-- 产品列表 -->
+  <scroll-view class="products-list" scroll-y>
+    <block wx:for="{{filteredProducts}}" wx:key="id">
+      <view class="product-card">
+        <!-- 产品图片 -->
+        <view class="product-image-section" wx:if="{{item.image}}">
+          <image src="{{item.image}}" class="product-image" mode="aspectFill"></image>
+          <view class="image-overlay">
+            <view class="category-tag">{{item.category}}</view>
+            <view class="expiry-badge {{item.expiryStatus.class}}">
+              {{item.expiryStatus.text}}
+            </view>
+          </view>
+        </view>
+        
+        <view class="product-content">
+          <!-- 品牌和名称 -->
+          <view class="product-header">
+            <view class="brand-info">
+              <text class="brand">{{item.brand}}</text>
+              <text class="category">{{item.category}}</text>
+            </view>
+            <view class="days-left {{item.expiryStatus.class}}">
+              {{item.daysLeft}}天
+            </view>
+          </view>
+          
+          <text class="product-name" wx:if="{{item.name}}">{{item.name}}</text>
+          
+          <!-- 系列和色号 -->
+          <view class="product-details">
+            <text class="product-series" wx:if="{{item.series}}">📋 {{item.series}}</text>
+            <text class="product-shade" wx:if="{{item.shade}}">🎨 {{item.shade}}</text>
+          </view>
+          
+          <!-- 日期信息 -->
+          <view class="date-info">
+            <view class="date-item">
+              <text class="date-label">启封日期</text>
+              <text class="date-value">{{item.openDate}}</text>
+            </view>
+            <view class="date-item">
+              <text class="date-label">保质期</text>
+              <text class="date-value">{{item.shelfLife}}个月</text>
+            </view>
+            <view class="date-item">
+              <text class="date-label">过期日期</text>
+              <text class="date-value expiry-date">{{item.expiryDate}}</text>
+            </view>
+          </view>
+          
+          <!-- 备注 -->
+          <view class="note-section" wx:if="{{item.note}}">
+            <text class="note-label">📝 备注</text>
+            <text class="note-content">{{item.note}}</text>
+          </view>
+          
+          <!-- 操作按钮 -->
+          <view class="action-buttons">
+            <button class="edit-btn" bindtap="editProduct" data-id="{{item.id}}">
+              <text class="btn-icon">✏️</text>
+              <text class="btn-text">编辑</text>
+            </button>
+            <button class="delete-btn" bindtap="deleteProduct" data-id="{{item.id}}">
+              <text class="btn-icon">🗑️</text>
+              <text class="btn-text">删除</text>
+            </button>
+          </view>
+          
+          <!-- 时间信息 -->
+          <view class="time-info">
+            <text class="time-text">添加于 {{item.addedDate}}</text>
+            <text class="time-text" wx:if="{{item.updatedDate && item.updatedDate !== item.addedDate}}">
+              更新于 {{item.updatedDate}}
+            </text>
+          </view>
+        </view>
+      </view>
+    </block>
+    
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{filteredProducts.length === 0}}">
+      <view class="empty-icon">📦</view>
+      <text class="empty-title">暂无产品记录</text>
+      <text class="empty-desc">
+        {{searchKeyword || filterCategory ? '没有找到匹配的产品' : '还没有添加任何化妆品哦'}}
+      </text>
+      <button class="empty-btn" bindtap="addNewProduct">
+        ➕ 添加第一个产品
+      </button>
+    </view>
+  </scroll-view>
+  
+  <!-- 添加按钮 -->
+  <view class="fab-container">
+    <button class="fab-btn" bindtap="addNewProduct">
+      <text class="fab-icon">+</text>
+    </button>
+  </view>
 </view>

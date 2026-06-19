@@ -1,5 +1,5 @@
 .add-container {
-  background: linear-gradient(135deg, #fff0f5 0%, #ffe4e9 100%);
+  background: linear-gradient(135deg, #f5f0ff 0%, #e9e0ff 100%);
   min-height: 100vh;
 }
 
@@ -17,7 +17,7 @@
 }
 
 .nav-back {
-  color: #ff5499;
+  color: #9b5de5;
   font-size: 32rpx;
   font-weight: bold;
 }
@@ -62,7 +62,7 @@
 }
 
 .form-input:focus, .category-picker:focus, .date-picker:focus {
-  border-bottom-color: #ff5499;
+  border-bottom-color: #9b5de5;
 }
 
 .picker-text {
@@ -73,26 +73,6 @@
 
 .picker-text.has-value {
   color: #333;
-}
-
-.shelf-life {
-  display: flex;
-  align-items: center;
-  border-bottom: 3rpx solid #f0f0f0;
-  padding-bottom: 25rpx;
-}
-
-.shelf-input {
-  flex: 1;
-  font-size: 32rpx;
-  color: #ff5499;
-  font-weight: bold;
-}
-
-.unit {
-  color: #999;
-  font-size: 28rpx;
-  margin-left: 20rpx;
 }
 
 .note-input {
@@ -180,7 +160,7 @@
 .save-btn {
   width: 100%;
   height: 100rpx;
-  background: linear-gradient(135deg, #ff7eb4, #ff65a3);
+  background: linear-gradient(135deg, #9b5de5, #7b3de0);
   color: white;
   border-radius: 50rpx;
   font-size: 36rpx;
@@ -188,11 +168,11 @@
   margin-top: 60rpx;
   border: none;
   transition: all 0.3s ease;
-  box-shadow: 0 10rpx 30rpx rgba(255, 84, 153, 0.3);
+  box-shadow: 0 10rpx 30rpx rgba(155, 93, 229, 0.3);
 }
 
 .btn-hover {
   opacity: 0.9;
   transform: translateY(-2rpx);
-  box-shadow: 0 15rpx 40rpx rgba(255, 84, 153, 0.4);
+  box-shadow: 0 15rpx 40rpx rgba(155, 93, 229, 0.4);
 }

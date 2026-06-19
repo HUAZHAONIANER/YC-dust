@@ -1,51 +1,143 @@
 <view class="add-container">
+  <!-- 顶部导航 -->
+  <view class="nav-header">
+    <view class="nav-back" bindtap="goBack">← 返回</view>
+    <text class="nav-title">{{isEdit ? '编辑产品' : '添加新产品'}}</text>
+    <view class="nav-placeholder"></view>
+  </view>
+  
   <view class="form-card">
-    <!-- 原有产品名称 -->
-    <input 
-      class="form-input" 
-      placeholder="💄 产品名称" 
-      bindinput="onNameInput"
-    />
+    <!-- 产品种类选择器 -->
+    <view class="form-group">
+      <text class="form-label">📦 产品种类</text>
+      <picker 
+        mode="selector" 
+        range="{{categories}}"
+        bindchange="onCategoryChange"
+        class="category-picker"
+      >
+        <view class="picker-text {{selectedCategory ? 'has-value' : ''}}">
+          {{selectedCategory || "请选择产品种类"}}
+        </view>
+      </picker>
+    </view>
 
-    <!-- 新增品牌输入 -->
-    <input
-      class="form-input"
-      placeholder="🏷️ 品牌名称"
-      bindinput="onBrandInput"
-    />
+    <!-- 其他类别输入 -->
+    <view wx:if="{{showOtherInput}}" class="form-group">
+      <text class="form-label">✏️ 其他类别名称</text>
+      <input
+        class="form-input"
+        placeholder="请输入其他类别名称"
+        bindinput="onOtherCategoryInput"
+        value="{{otherCategory}}"
+      />
+    </view>
 
-    <!-- 种类选择器 -->
-    <picker 
-      mode="selector" 
-      range="{{categories}}"
-      bindchange="onCategoryChange"
-      class="category-picker"
-    >
-      <view class="picker-text">
-        📦 {{selectedCategory || "选择产品种类"}}
-      </view>
-    </picker>
+    <!-- 品牌输入 -->
+    <view class="form-group">
+      <text class="form-label">🏷️ 品牌名称</text>
+      <input
+        class="form-input"
+        placeholder="请输入品牌名称"
+        bindinput="onBrandInput"
+        value="{{brand}}"
+      />
+    </view>
+
+    <!-- 产品系列输入 -->
+    <view class="form-group">
+      <text class="form-label">📋 产品系列（可选）</text>
+      <input
+        class="form-input"
+        placeholder="请输入产品系列"
+        bindinput="onSeriesInput"
+        value="{{series}}"
+      />
+    </view>
+
+    <!-- 产品名称输入 -->
+    <view class="form-group">
+      <text class="form-label">💄 产品名称（可选）</text>
+      <input 
+        class="form-input" 
+        placeholder="请输入产品名称" 
+        bindinput="onNameInput"
+        value="{{productName}}"
+      />
+    </view>
+
+    <!-- 色号输入 -->
+    <view class="form-group">
+      <text class="form-label">🎨 色号（可选）</text>
+      <input
+        class="form-input"
+        placeholder="请输入色号"
+        bindinput="onShadeInput"
+        value="{{shade}}"
+      />
+    </view>
 
     <!-- 启封日期 -->
-    <picker
-      mode="date"
-      bindchange="onOpenDateChange"
-      class="date-picker"
-    >
-      <view class="picker-text">
-        📅 {{openDate || "选择启封日期"}}
-      </view>
-    </picker>
+    <view class="form-group">
+      <text class="form-label">📅 启封日期</text>
+      <picker
+        mode="date"
+        bindchange="onOpenDateChange"
+        class="date-picker"
+        value="{{openDate}}"
+      >
+        <view class="picker-text {{openDate ? 'has-value' : ''}}">
+          {{openDate || "请选择启封日期"}}
+        </view>
+      </picker>
+    </view>
 
     <!-- 保质期输入 -->
-    <view class="shelf-life">
-      <input
-        type="number"
-        class="shelf-input"
-        placeholder="⏳ 开封后保质期（月）"
-        bindinput="onShelfLifeInput"
-      />
-      <text class="unit">个月</text>
+    <view class="form-group">
+      <text class="form-label">⏳ 开封后保质期</text>
+      <view class="shelf-life">
+        <input
+          type="number"
+          class="shelf-input"
+          placeholder="请输入保质期月数"
+          bindinput="onShelfLifeInput"
+          value="{{shelfLife}}"
+        />
+        <text class="unit">个月</text>
+      </view>
+    </view>
+
+    <!-- 备注输入 -->
+    <view class="form-group">
+      <text class="form-label">📝 备注信息（可选）</text>
+      <textarea
+        class="note-input"
+        placeholder="请输入备注信息"
+        bindinput="onNoteInput"
+        maxlength="200"
+        value="{{note}}"
+      ></textarea>
+    </view>
+
+    <!-- 上传图片 -->
+    <view class="form-group">
+      <text class="form-label">📷 上传产品图片（可选）</text>
+      <view class="upload-section">
+        <view class="upload-area" bindtap="uploadImage">
+          <block wx:if="{{image}}">
+            <image src="{{image}}" class="preview-image" mode="aspectFill"></image>
+            <view class="upload-overlay">
+              <text class="upload-change">点击更换图片</text>
+            </view>
+          </block>
+          <block wx:else>
+            <view class="upload-placeholder">
+              <text class="upload-icon">+</text>
+              <text class="upload-text">点击上传图片</text>
+            </view>
+          </block>
+        </view>
+      </view>
     </view>
 
     <!-- 保存按钮 -->
@@ -54,7 +146,7 @@
       bindtap="saveProduct"
       hover-class="btn-hover"
     >
-      💾 保存美丽档案
+      💾 {{isEdit ? '更新产品信息' : '保存美丽档案'}}
     </button>
   </view>
 </view>

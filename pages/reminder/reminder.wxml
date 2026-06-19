@@ -1,22 +1,53 @@
 <view class="reminder-container">
-  <block wx:for="{{expiringProducts}}" wx:key="index">
-    <view class="reminder-card {{item.daysLeft < 7 ? 'urgent' : ''}}">
+  <!-- 顶部标题 -->
+  <view class="page-header">
+    <text class="page-title">⏰ 保鲜提醒</text>
+    <text class="page-subtitle">及时使用即将过期的产品</text>
+  </view>
+
+  <block wx:for="{{expiringProducts}}" wx:key="id">
+    <view class="reminder-card {{item.daysLeft <= 7 ? 'urgent' : ''}} {{item.daysLeft < 0 ? 'expired' : ''}}">
       <view class="product-header">
-        <text class="brand">{{item.brand}}</text>
-        <text class="category">{{item.category}}</text>
+        <view class="brand-info">
+          <text class="brand">{{item.brand}}</text>
+          <text class="category">{{item.category}}</text>
+        </view>
+        <view class="days-left {{item.daysLeft <= 7 ? 'urgent' : ''}}">
+          {{item.daysLeft}}天
+        </view>
       </view>
-      <text class="product-name">⚠️ {{item.name}}</text>
+      
+      <text class="product-name" wx:if="{{item.name}}">{{item.name}}</text>
+      <text class="product-name" wx:else>产品名称未填写</text>
       
       <view class="reminder-info">
         <view class="info-item">
-          <text>启封日期: {{item.openDate}}</text>
-          <text>剩余: {{item.daysLeft}}天</text>
+          <text>启封日期</text>
+          <text>{{item.openDate}}</text>
         </view>
         <view class="info-item">
-          <text>过期日期: {{item.expiryDate}}</text>
-          <text>已使用: {{item.usedDays}}天</text>
+          <text>过期日期</text>
+          <text>{{item.expiryDate}}</text>
+        </view>
+        <view class="info-item">
+          <text>剩余天数</text>
+          <text>{{item.daysLeft}}天</text>
+        </view>
+        <view class="info-item" wx:if="{{item.usedDays}}">
+          <text>已使用</text>
+          <text>{{item.usedDays}}天</text>
         </view>
       </view>
     </view>
   </block>
+
+  <!-- 空状态 -->
+  <view class="empty-reminder" wx:if="{{expiringProducts.length === 0}}">
+    <view class="empty-icon">🎉</view>
+    <text class="empty-title">暂无过期提醒</text>
+    <text class="empty-desc">所有产品都在保质期内</text>
+    <button class="empty-btn" bindtap="goToCosmetics">
+      💄 查看所有产品
+    </button>
+  </view>
 </view>

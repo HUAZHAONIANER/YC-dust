@@ -1,0 +1,58 @@
+<view class="wardrobe-container">
+  <!-- 顶部欢迎语 -->
+  <view class="header-section">
+    <text class="welcome-text" style="opacity:{{welcomeOpacity}}">{{currentWelcome}}</text>
+    <text class="subtitle">精心管理您的时尚衣橱</text>
+  </view>
+  
+  <!-- 功能卡片区域 -->
+  <view class="function-cards">
+    <!-- 添加新衣物 -->
+    <view class="function-card purple-card" bindtap="navigateToAdd">
+      <view class="card-icon">👕</view>
+      <view class="card-content">
+        <text class="card-title">添加新衣物</text>
+        <text class="card-desc">记录您的时尚单品信息</text>
+      </view>
+      <view class="card-arrow">›</view>
+    </view>
+    <!-- 衣橱总览 -->
+    <view class="function-card blue-card" bindtap="navigateToHistory">
+      <view class="card-icon">👗</view>
+      <view class="card-content">
+        <text class="card-title">衣橱总览</text>
+        <text class="card-desc">查看所有衣物记录</text>
+      </view>
+      <view class="card-arrow">›</view>
+    </view>
+  </view>
+  
+  <!-- 统计信息 -->
+  <view class="stats-section" wx:if="{{totalClothes > 0}}">
+    <view class="stats-header">
+      <text class="stats-title">📊 衣橱统计</text>
+    </view>
+    <view class="stats-grid">
+      <view class="stat-item">
+        <text class="stat-number">{{totalClothes}}</text>
+        <text class="stat-label">总衣物数</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-number">{{categoriesCount}}</text>
+        <text class="stat-label">品类数量</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-number">{{seasonsCount}}</text>
+        <text class="stat-label">季节分布</text>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{totalClothes === 0}}">
+    <view class="empty-icon">👔</view>
+    <text class="empty-title">还没有衣物记录</text>
+    <text class="empty-desc">开始记录您的第一件衣物吧</text>
+    <button class="empty-btn" bindtap="navigateToAdd">✨ 添加第一件衣物</button>
+  </view>
+</view>

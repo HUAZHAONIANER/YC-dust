@@ -1,0 +1,137 @@
+<view class="add-container">
+  <!-- 顶部导航 -->
+  <view class="nav-header">
+    <view class="nav-back" bindtap="goBack">← 返回</view>
+    <text class="nav-title">{{isEdit ? '编辑衣物' : '添加新衣物'}}</text>
+    <view class="nav-placeholder"></view>
+  </view>
+  
+  <view class="form-card">
+    <!-- 品牌输入 -->
+    <view class="form-group">
+      <text class="form-label">🏷️ 品牌（可选）</text>
+      <input
+        class="form-input"
+        placeholder="请输入品牌名称"
+        bindinput="onBrandInput"
+        value="{{brand}}"
+      />
+    </view>
+    
+    <!-- 衣物类别选择器 -->
+    <view class="form-group">
+      <text class="form-label">👕 衣物类别</text>
+      <picker 
+        mode="selector" 
+        range="{{categories}}"
+        bindchange="onCategoryChange"
+        value="{{selectedCategoryIndex}}"
+        class="category-picker"
+      >
+        <view class="picker-text {{category ? 'has-value' : ''}}">
+          {{category || "请选择衣物类别"}}
+        </view>
+      </picker>
+    </view>
+    
+    <!-- 颜色选择器 -->
+    <view class="form-group">
+      <text class="form-label">🎨 颜色</text>
+      <picker 
+        mode="selector" 
+        range="{{colors}}"
+        bindchange="onColorChange"
+        value="{{selectedColorIndex}}"
+        class="category-picker"
+      >
+        <view class="picker-text {{color ? 'has-value' : ''}}">
+          {{color || "请选择颜色"}}
+        </view>
+      </picker>
+    </view>
+    
+    <!-- 季节选择器 -->
+    <view class="form-group">
+      <text class="form-label">🌱 适用季节</text>
+      <picker 
+        mode="selector" 
+        range="{{seasons}}"
+        bindchange="onSeasonChange"
+        value="{{selectedSeasonIndex}}"
+        class="category-picker"
+      >
+        <view class="picker-text {{season ? 'has-value' : ''}}">
+          {{season || "请选择适用季节"}}
+        </view>
+      </picker>
+    </view>
+    
+    <!-- 材质输入 -->
+    <view class="form-group">
+      <text class="form-label">🧵 材质（可选）</text>
+      <input
+        class="form-input"
+        placeholder="如：棉、羊毛、涤纶等"
+        bindinput="onMaterialInput"
+        value="{{material}}"
+      />
+    </view>
+    
+    <!-- 购买日期 -->
+    <view class="form-group">
+      <text class="form-label">📅 购买日期</text>
+      <picker
+        mode="date"
+        bindchange="onPurchaseDateChange"
+        class="date-picker"
+        value="{{purchaseDate}}"
+      >
+        <view class="picker-text {{purchaseDate ? 'has-value' : ''}}">
+          {{purchaseDate || "请选择购买日期"}}
+        </view>
+      </picker>
+    </view>
+    
+    <!-- 备注输入 -->
+    <view class="form-group">
+      <text class="form-label">📝 备注信息（可选）</text>
+      <textarea
+        class="note-input"
+        placeholder="请输入备注信息，如尺码、购买地点等"
+        bindinput="onNoteInput"
+        maxlength="200"
+        value="{{note}}"
+      ></textarea>
+    </view>
+    
+    <!-- 上传图片 -->
+    <view class="form-group">
+      <text class="form-label">📷 上传衣物图片（可选）</text>
+      <view class="upload-section">
+        <view class="upload-area" bindtap="uploadImage">
+          <block wx:if="{{image}}">
+            <image src="{{image}}" class="preview-image" mode="aspectFill"></image>
+            <view class="upload-overlay">
+              <text class="upload-change">点击更换图片</text>
+            </view>
+          </block>
+          <block wx:else>
+            <view class="upload-placeholder">
+              <text class="upload-icon">+</text>
+              <text class="upload-text">点击上传图片</text>
+            </view>
+          </block>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 保存按钮 -->
+    <button 
+      class="save-btn" 
+      bindtap="saveClothing"
+      hover-class="btn-hover"
+    >
+      💾 {{isEdit ? '更新衣物信息' : '保存时尚单品'}}
+    </button>
+  </view>
+</view>

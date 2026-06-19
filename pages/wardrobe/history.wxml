@@ -1,0 +1,189 @@
+<view class="history-container">
+  <!-- 顶部标题 -->
+  <view class="page-header">
+    <text class="page-title">👗 衣橱总览</text>
+    <text class="page-subtitle">管理您的时尚收藏</text>
+  </view>
+  
+  <!-- 搜索和筛选栏 -->
+  <view class="search-filter-bar">
+    <view class="search-box">
+      <input
+        class="search-input"
+        placeholder="🔍 搜索品牌、类别、颜色..."
+        bindinput="onSearchInput"
+        value="{{searchKeyword}}"
+      />
+      <text class="search-clear" wx:if="{{searchKeyword}}" bindtap="clearSearch">×</text>
+    </view>
+  </view>
+  
+  <!-- 筛选器 -->
+  <view class="filter-container">
+    <view class="filter-row">
+      <picker 
+        mode="selector" 
+        range="{{categories}}"
+        bindchange="onCategoryFilterChange"
+        value="{{filterCategory ? categories.indexOf(filterCategory) : 0}}"
+        class="filter-picker"
+      >
+        <view class="filter-btn">
+          👕 {{filterCategory || "全部类别"}}
+        </view>
+      </picker>
+      
+      <picker 
+        mode="selector" 
+        range="{{seasons}}"
+        bindchange="onSeasonFilterChange"
+        value="{{filterSeason ? seasons.indexOf(filterSeason) : 0}}"
+        class="filter-picker"
+      >
+        <view class="filter-btn">
+          🌱 {{filterSeason || "全部季节"}}
+        </view>
+      </picker>
+    </view>
+  </view>
+  
+  <!-- 统计信息 -->
+  <view class="stats-section" wx:if="{{totalCount > 0}}">
+    <view class="stats-header">
+      <text class="stats-title">📊 衣物统计</text>
+      <text class="stats-count">{{totalCount}} 件</text>
+    </view>
+    
+    <!-- 类别分布 -->
+    <view class="stats-category" wx:if="{{Object.keys(categoryStats).length > 0}}">
+      <text class="stats-subtitle">类别分布</text>
+      <view class="category-tags">
+        <view class="category-tag" wx:for="{{Object.keys(categoryStats)}}" wx:key="index">
+          <text class="tag-name">{{item}}</text>
+          <text class="tag-count">{{categoryStats[item]}}</text>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 颜色分布 -->
+    <view class="stats-category" wx:if="{{Object.keys(colorStats).length > 0}}">
+      <text class="stats-subtitle">颜色分布</text>
+      <view class="color-tags">
+        <view 
+          class="color-tag" 
+          wx:for="{{Object.keys(colorStats)}}" 
+          wx:key="index"
+          style="background-color: {{getColorHex(item)}};"
+        >
+          <text class="tag-name">{{item}}</text>
+          <text class="tag-count">{{colorStats[item]}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 衣物列表 -->
+  <scroll-view class="clothes-list" scroll-y>
+    <block wx:for="{{filteredClothes}}" wx:key="id">
+      <view class="clothing-card">
+        <!-- 衣物图片 -->
+        <view class="clothing-image-section" wx:if="{{item.image}}">
+          <image src="{{item.image}}" class="clothing-image" mode="aspectFill"></image>
+          <view class="image-overlay">
+            <view class="category-tag">{{item.category}}</view>
+            <view class="season-tag">{{item.season}}</view>
+          </view>
+        </view>
+        
+        <!-- 默认图片 -->
+        <view class="clothing-image-section" wx:else>
+          <view class="default-image">
+            <text class="default-icon">👕</text>
+          </view>
+          <view class="image-overlay">
+            <view class="category-tag">{{item.category}}</view>
+            <view class="season-tag">{{item.season}}</view>
+          </view>
+        </view>
+        
+        <view class="clothing-content">
+          <!-- 品牌和颜色 -->
+          <view class="clothing-header">
+            <view class="brand-info">
+              <text class="brand" wx:if="{{item.brand}}">{{item.brand}}</text>
+              <text class="color" style="color: {{getColorHex(item.color)}};">{{item.color}}</text>
+            </view>
+            <view class="purchase-date">
+              {{item.purchaseDate}}
+            </view>
+          </view>
+          
+          <!-- 类别和季节 -->
+          <view class="clothing-details">
+            <view class="detail-item">
+              <text class="detail-label">类别</text>
+              <text class="detail-value">{{item.category}}</text>
+            </view>
+            <view class="detail-item">
+              <text class="detail-label">季节</text>
+              <text class="detail-value">{{item.season}}</text>
+            </view>
+          </view>
+          
+          <!-- 材质 -->
+          <view class="clothing-details" wx:if="{{item.material}}">
+            <view class="detail-item">
+              <text class="detail-label">材质</text>
+              <text class="detail-value">{{item.material}}</text>
+            </view>
+          </view>
+          
+          <!-- 备注 -->
+          <view class="note-section" wx:if="{{item.note}}">
+            <text class="note-label">📝 备注</text>
+            <text class="note-content">{{item.note}}</text>
+          </view>
+          
+          <!-- 操作按钮 -->
+          <view class="action-buttons">
+            <button class="edit-btn" bindtap="editClothing" data-id="{{item.id}}">
+              <text class="btn-icon">✏️</text>
+              <text class="btn-text">编辑</text>
+            </button>
+            <button class="delete-btn" bindtap="deleteClothing" data-id="{{item.id}}">
+              <text class="btn-icon">🗑️</text>
+              <text class="btn-text">删除</text>
+            </button>
+          </view>
+          
+          <!-- 时间信息 -->
+          <view class="time-info">
+            <text class="time-text">添加于 {{item.addedDate}}</text>
+            <text class="time-text" wx:if="{{item.updatedDate && item.updatedDate !== item.addedDate}}">
+              更新于 {{item.updatedDate}}
+            </text>
+          </view>
+        </view>
+      </view>
+    </block>
+    
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{filteredClothes.length === 0}}">
+      <view class="empty-icon">👔</view>
+      <text class="empty-title">暂无衣物记录</text>
+      <text class="empty-desc">
+        {{searchKeyword || filterCategory || filterSeason ? '没有找到匹配的衣物' : '还没有添加任何衣物哦'}}
+      </text>
+      <button class="empty-btn" bindtap="addNewClothing">
+        ➕ 添加第一件衣物
+      </button>
+    </view>
+  </scroll-view>
+  
+  <!-- 添加按钮 -->
+  <view class="fab-container">
+    <button class="fab-btn" bindtap="addNewClothing">
+      <text class="fab-icon">+</text>
+    </button>
+  </view>
+</view>

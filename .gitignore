@@ -12,3 +12,16 @@ $RECYCLE.BIN/
 
 # Node.js
 node_modules/
+# IDE
+.idea/
+*.iml
+
+# Build artifacts
+*.apk
+*.aab
+# Miniapp build
+miniapp/
+app.miniapp.json
+project.miniapp.json
+# WeChat DevTools private config
+project.private.config.json

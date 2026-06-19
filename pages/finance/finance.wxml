@@ -1,0 +1,205 @@
+<view class="finance-container">
+  <view class="header-section">
+    <text class="page-title">💰 财务管理</text>
+    <text class="page-subtitle">精打细算，财富自由之路</text>
+  </view>
+  
+  <view class="tab-bar">
+    <view class="tab-item {{currentTab === 'record' ? 'active' : ''}}" data-tab="record" bindtap="switchTab">
+      📝 记账
+    </view>
+    <view class="tab-item {{currentTab === 'statistics' ? 'active' : ''}}" data-tab="statistics" bindtap="switchTab">
+      📊 统计
+    </view>
+  </view>
+  
+  <!-- 记账页面 -->
+  <view class="tab-content" wx:if="{{currentTab === 'record'}}">
+    <view class="form-card">
+      <view class="section-title">记录收支</view>
+      
+      <view class="type-switch">
+        <view class="type-btn {{recordType === 'income' ? 'active income' : ''}}" data-type="income" bindtap="onRecordTypeChange">
+          收入
+        </view>
+        <view class="type-btn {{recordType === 'expense' ? 'active expense' : ''}}" data-type="expense" bindtap="onRecordTypeChange">
+          支出
+        </view>
+      </view>
+      
+      <view class="form-group">
+        <text class="form-label">💰 金额 (元)</text>
+        <input
+          class="form-input"
+          type="number"
+          placeholder="请输入金额"
+          bindinput="onAmountInput"
+          value="{{amount}}"
+        />
+      </view>
+      
+      <view class="form-group">
+        <text class="form-label">📅 日期</text>
+        <picker mode="date" bindchange="onDateChange" value="{{date}}">
+          <view class="picker-text {{date ? 'has-value' : ''}}">
+            {{date || "选择日期"}}
+          </view>
+        </picker>
+      </view>
+      
+      <view class="form-group">
+        <text class="form-label">🏷️ 分类</text>
+        <picker 
+          mode="selector" 
+          range="{{categories[recordType]}}" 
+          bindchange="onCategoryChange"
+        >
+          <view class="picker-text {{category ? 'has-value' : ''}}">
+            {{category || "选择分类"}}
+          </view>
+        </picker>
+      </view>
+      
+      <view class="form-group">
+        <text class="form-label">📝 备注 (可选)</text>
+        <textarea
+          class="note-input"
+          placeholder="请输入备注"
+          bindinput="onNoteInput"
+          value="{{note}}"
+        ></textarea>
+      </view>
+      
+      <button class="save-btn" bindtap="saveRecord">
+        💾 保存记录
+      </button>
+    </view>
+    
+    <!-- 历史记录 -->
+    <view class="history-section" wx:if="{{records.length > 0}}">
+      <view class="section-header">
+        <text class="section-title">最近记录</text>
+        <view class="action-buttons">
+          <text class="action-btn" bindtap="exportData">📤 导出</text>
+        </view>
+      </view>
+      
+      <scroll-view class="records-list" scroll-y>
+        <view class="record-card" wx:for="{{records}}" wx:key="id">
+          <view class="record-header">
+            <view class="record-type {{item.type}}">
+              <text class="type-icon">{{item.type === 'income' ? '💰' : '💸'}}</text>
+              <text class="type-text">{{item.type === 'income' ? '收入' : '支出'}}</text>
+            </view>
+            <text class="record-amount {{item.type}}">
+              {{item.type === 'income' ? '+' : '-'}}{{item.amount}}
+            </text>
+          </view>
+          
+          <view class="record-content">
+            <view class="record-details">
+              <text class="record-category">{{item.category}}</text>
+              <text class="record-date">{{item.date}}</text>
+            </view>
+            <text class="record-note" wx:if="{{item.note}}">{{item.note}}</text>
+          </view>
+          
+          <view class="record-footer">
+            <text class="record-time">{{item.createdAt.split('T')[0]}}</text>
+            <text class="delete-btn" data-id="{{item.id}}" bindtap="deleteRecord">🗑️</text>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+  
+  <!-- 统计页面 -->
+  <view class="tab-content" wx:if="{{currentTab === 'statistics'}}">
+    <!-- 筛选器 -->
+    <view class="filter-section">
+      <view class="filter-group">
+        <text class="filter-label">年份</text>
+        <picker mode="selector" range="{{years}}" bindchange="onYearFilterChange">
+          <view class="filter-picker">{{filterYear}}</view>
+        </picker>
+      </view>
+      <view class="filter-group">
+        <text class="filter-label">月份</text>
+        <picker mode="selector" range="{{months}}" bindchange="onMonthFilterChange">
+          <view class="filter-picker">{{filterMonth}}</view>
+        </picker>
+      </view>
+    </view>
+    
+    <!-- 月度统计 -->
+    <view class="stats-overview">
+      <view class="stat-card income">
+        <text class="stat-label">月收入</text>
+        <text class="stat-value">¥{{monthlyIncome}}</text>
+      </view>
+      <view class="stat-card expense">
+        <text class="stat-label">月支出</text>
+        <text class="stat-value">¥{{monthlyExpense}}</text>
+      </view>
+      <view class="stat-card balance">
+        <text class="stat-label">月结余</text>
+        <text class="stat-value {{parseFloat(monthlyBalance) >= 0 ? 'positive' : 'negative'}}">
+          ¥{{monthlyBalance}}
+        </text>
+      </view>
+    </view>
+    
+    <!-- 年度统计 -->
+    <view class="yearly-stats">
+      <view class="section-title">年度统计 ({{filterYear}})</view>
+      <view class="yearly-grid">
+        <view class="yearly-item">
+          <text class="yearly-label">年收入</text>
+          <text class="yearly-value income">¥{{yearlyIncome}}</text>
+        </view>
+        <view class="yearly-item">
+          <text class="yearly-label">年支出</text>
+          <text class="yearly-value expense">¥{{yearlyExpense}}</text>
+        </view>
+        <view class="yearly-item">
+          <text class="yearly-label">年结余</text>
+          <text class="yearly-value {{parseFloat(yearlyBalance) >= 0 ? 'positive' : 'negative'}}">
+            ¥{{yearlyBalance}}
+          </text>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 分类统计 -->
+    <view class="category-stats">
+      <view class="section-title">分类统计</view>
+      
+      <!-- 收入分类 -->
+      <view class="category-section" wx:if="{{hasIncomeData}}">
+        <text class="category-type">收入分类</text>
+        <view class="category-list">
+          <view class="category-item" wx:for="{{incomeCategories}}" wx:key="name">
+            <text class="category-name">{{item.name}}</text>
+            <text class="category-amount">¥{{item.amountText}}</text>
+          </view>
+        </view>
+      </view>
+      
+      <!-- 支出分类 -->
+      <view class="category-section" wx:if="{{hasExpenseData}}">
+        <text class="category-type">支出分类</text>
+        <view class="category-list">
+          <view class="category-item" wx:for="{{expenseCategories}}" wx:key="name">
+            <text class="category-name">{{item.name}}</text>
+            <text class="category-amount">¥{{item.amountText}}</text>
+          </view>
+        </view>
+      </view>
+      
+      <!-- 无数据状态 -->
+      <view class="no-data" wx:if="{{!hasIncomeData && !hasExpenseData}}">
+        <text class="no-data-text">暂无统计数据</text>
+      </view>
+    </view>
+  </view>
+</view>

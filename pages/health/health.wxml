@@ -1,0 +1,256 @@
+<view class="health-container">
+  <view class="header-section">
+    <text class="page-title">❤️ 健康管理</text>
+    <text class="page-subtitle">关注健康，享受美好生活</text>
+  </view>
+  <view class="tab-bar">
+    <view class="tab-item {{currentTab === 'bmi' ? 'active' : ''}}" data-tab="bmi" bindtap="switchTab">
+      📊 BMI记录
+    </view>
+    <view class="tab-item {{currentTab === 'period' ? 'active' : ''}}" data-tab="period" bindtap="switchTab">
+      🌸 月经周期
+    </view>
+    <view class="tab-item {{currentTab === 'milktea' ? 'active' : ''}}" data-tab="milktea" bindtap="switchTab">
+      🥤 奶茶记录
+    </view>
+  </view>
+
+  <view class="tab-content" wx:if="{{currentTab === 'bmi'}}">
+    <view class="form-card">
+      <view class="section-title">BMI计算器</view>
+      
+      <view class="form-group">
+        <text class="form-label">📏 身高 (cm)</text>
+        <input
+          class="form-input"
+          type="number"
+          placeholder="请输入身高"
+          bindinput="onHeightInput"
+          value="{{height}}"
+        />
+      </view>
+      <view class="form-group">
+        <text class="form-label">⚖️ 体重 (kg)</text>
+        <input
+          class="form-input"
+          type="number"
+          placeholder="请输入体重"
+          bindinput="onWeightInput"
+          value="{{weight}}"
+        />
+      </view>
+      <button class="save-btn" bindtap="calculateBMI">
+        🧮 计算BMI
+      </button>
+      <view class="bmi-result" wx:if="{{bmi}}">
+        <view class="result-card">
+          <text class="result-title">您的BMI指数</text>
+          <text class="bmi-value">{{bmi}}</text>
+          <text class="bmi-status">{{bmiStatus}}</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 图表控制区域 -->
+    <view class="chart-controls" wx:if="{{bmiRecords.length > 0}}">
+      <view class="chart-header">
+        <text class="chart-title">📈 健康趋势分析</text>
+        <view class="chart-toggle" bindtap="toggleChart">
+          <text>{{showChart ? '隐藏图表' : '显示图表'}}</text>
+        </view>
+      </view>
+      
+      <view class="chart-content" wx:if="{{showChart}}">
+        <view class="chart-type-selector">
+          <text class="chart-type-label">统计周期:</text>
+          <view class="chart-type-buttons">
+            <text class="chart-type-btn {{chartType === 'week' ? 'active' : ''}}" 
+                  data-type="week" bindtap="onChartTypeChange">周</text>
+            <text class="chart-type-btn {{chartType === 'month' ? 'active' : ''}}" 
+                  data-type="month" bindtap="onChartTypeChange">月</text>
+            <text class="chart-type-btn {{chartType === 'year' ? 'active' : ''}}" 
+                  data-type="year" bindtap="onChartTypeChange">年</text>
+          </view>
+        </view>
+
+        <!-- 体重图表 -->
+        <view class="chart-container">
+          <text class="chart-subtitle">体重变化趋势 (kg)</text>
+          <canvas id="weightChart" type="2d" class="health-chart"></canvas>
+        </view>
+
+        <!-- BMI图表 -->
+        <view class="chart-container">
+          <text class="chart-subtitle">BMI变化趋势</text>
+          <canvas id="bmiChart" type="2d" class="health-chart"></canvas>
+        </view>
+      </view>
+    </view>
+
+    <view class="history-section" wx:if="{{bmiRecords.length > 0}}">
+      <view class="section-title">历史记录</view>
+      <scroll-view class="records-list" scroll-y>
+        <view class="record-card" wx:for="{{bmiRecords}}" wx:key="id">
+          <view class="record-header">
+            <text class="record-date">{{item.date}}</text>
+            <text class="delete-btn" data-type="bmi" data-id="{{item.id}}" bindtap="deleteRecord">🗑️</text>
+          </view>
+          <view class="record-content">
+            <view class="record-item">
+              <text>身高: {{item.height}}cm</text>
+              <text>体重: {{item.weight}}kg</text>
+            </view>
+            <view class="record-item">
+              <text class="bmi-display">BMI: {{item.bmi}}</text>
+              <text class="status-tag">{{item.status}}</text>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+
+  <view class="tab-content" wx:if="{{currentTab === 'period'}}">
+    <view class="form-card">
+      <view class="section-title">月经周期记录</view>
+      
+      <view class="form-group">
+        <text class="form-label">📅 开始日期</text>
+        <picker mode="date" bindchange="onPeriodStartChange" value="{{periodStartDate}}">
+          <view class="picker-text {{periodStartDate ? 'has-value' : ''}}">
+            {{periodStartDate || "选择开始日期"}}
+          </view>
+        </picker>
+      </view>
+      <view class="form-group">
+        <text class="form-label">📅 结束日期</text>
+        <picker mode="date" bindchange="onPeriodEndChange" value="{{periodEndDate}}">
+          <view class="picker-text {{periodEndDate ? 'has-value' : ''}}">
+            {{periodEndDate || "选择结束日期"}}
+          </view>
+        </picker>
+      </view>
+      <view class="period-result" wx:if="{{periodDays}}">
+        <view class="result-grid">
+          <view class="result-item">
+            <text class="result-label">持续天数</text>
+            <text class="result-value">{{periodDays}}天</text>
+          </view>
+          <view class="result-item">
+            <text class="result-label">预测下次</text>
+            <text class="result-value">{{nextPeriodDate}}</text>
+          </view>
+        </view>
+      </view>
+      <button class="save-btn" bindtap="savePeriodRecord">
+        💾 保存记录
+      </button>
+    </view>
+    <view class="history-section" wx:if="{{periodRecords.length > 0}}">
+      <view class="section-title">周期历史</view>
+      <scroll-view class="records-list" scroll-y>
+        <view class="record-card" wx:for="{{periodRecords}}" wx:key="id">
+          <view class="record-header">
+            <text class="record-date">{{item.startDate}}</text>
+            <text class="delete-btn" data-type="period" data-id="{{item.id}}" bindtap="deleteRecord">🗑️</text>
+          </view>
+          <view class="record-content">
+            <view class="record-item">
+              <text>开始: {{item.startDate}}</text>
+              <text>结束: {{item.endDate}}</text>
+            </view>
+            <view class="record-item">
+              <text>持续: {{item.days}}天</text>
+              <text>预测下次: {{item.nextStartDate}}</text>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+
+  <view class="tab-content" wx:if="{{currentTab === 'milktea'}}">
+    <view class="form-card">
+      <view class="section-title">奶茶记录</view>
+      
+      <view class="form-group">
+        <text class="form-label">🏷️ 品牌</text>
+        <input
+          class="form-input"
+          placeholder="请输入奶茶品牌"
+          bindinput="onMilkteaBrandInput"
+          value="{{milkteaBrand}}"
+        />
+      </view>
+      <view class="form-group">
+        <text class="form-label">🥤 产品名称</text>
+        <input
+          class="form-input"
+          placeholder="请输入产品名称"
+          bindinput="onMilkteaNameInput"
+          value="{{milkteaName}}"
+        />
+      </view>
+      <view class="form-group">
+        <text class="form-label">📏 容量 (ml)</text>
+        <input
+          class="form-input"
+          type="number"
+          placeholder="请输入容量"
+          bindinput="onMilkteaSizeInput"
+          value="{{milkteaSize}}"
+        />
+      </view>
+      <view class="form-group">
+        <text class="form-label">📝 备注 (可选)</text>
+        <textarea
+          class="note-input"
+          placeholder="请输入备注"
+          bindinput="onMilkteaNoteInput"
+          value="{{milkteaNote}}"
+        ></textarea>
+      </view>
+      <button class="save-btn" bindtap="saveMilkteaRecord">
+        💾 保存记录
+      </button>
+    </view>
+    <view class="stats-section" wx:if="{{milkteaRecords.length > 0}}">
+      <view class="section-title">奶茶统计</view>
+      <view class="stats-grid">
+        <view class="stat-item">
+          <text class="stat-number">{{milkteaRecords.length}}</text>
+          <text class="stat-label">总杯数</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-number">{{currentMonthMilkteaCount}}</text>
+          <text class="stat-label">本月杯数</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-number">{{currentYearMilkteaCount}}</text>
+          <text class="stat-label">今年杯数</text>
+        </view>
+      </view>
+    </view>
+    <view class="history-section" wx:if="{{milkteaRecords.length > 0}}">
+      <view class="section-title">饮用记录</view>
+      <scroll-view class="records-list" scroll-y>
+        <view class="record-card" wx:for="{{milkteaRecords}}" wx:key="id">
+          <view class="record-header">
+            <text class="record-date">{{item.date}}</text>
+            <text class="delete-btn" data-type="milktea" data-id="{{item.id}}" bindtap="deleteRecord">🗑️</text>
+          </view>
+          <view class="record-content">
+            <view class="record-item">
+              <text class="milktea-brand">{{item.brand}}</text>
+              <text class="milktea-size">{{item.size}}ml</text>
+            </view>
+            <view class="record-item">
+              <text class="milktea-name">{{item.name}}</text>
+              <text class="milktea-note" wx:if="{{item.note}}">{{item.note}}</text>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+</view>

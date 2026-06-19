@@ -1,0 +1,67 @@
+<view class="cosmetics-container">
+  <!-- 顶部欢迎语 -->
+  <view class="header-section">
+    <text class="welcome-text" style="opacity:{{welcomeOpacity}}">{{currentWelcome}}</text>
+    <text class="subtitle">精心管理您的美丽藏品</text>
+  </view>
+  
+  <!-- 功能卡片区域 -->
+  <view class="function-cards">
+    <!-- 添加新化妆品 -->
+    <view class="function-card pink-card" bindtap="navigateToAdd">
+      <view class="card-icon">💄</view>
+      <view class="card-content">
+        <text class="card-title">添加新化妆品</text>
+        <text class="card-desc">记录您的美丽藏品信息</text>
+      </view>
+      <view class="card-arrow">›</view>
+    </view>
+    <!-- 产品档案库 -->
+    <view class="function-card purple-card" bindtap="navigateToHistory">
+      <view class="card-icon">📚</view>
+      <view class="card-content">
+        <text class="card-title">产品档案库</text>
+        <text class="card-desc">查看所有化妆品记录</text>
+      </view>
+      <view class="card-arrow">›</view>
+    </view>
+    <!-- 保鲜提醒 -->
+    <view class="function-card coral-card" bindtap="navigateToReminder">
+      <view class="card-icon">⏰</view>
+      <view class="card-content">
+        <text class="card-title">保鲜提醒</text>
+        <text class="card-desc">及时使用即将过期的产品</text>
+      </view>
+      <view class="card-arrow">›</view>
+    </view>
+  </view>
+
+  <!-- 统计信息 -->
+  <view class="stats-section" wx:if="{{totalProducts > 0}}">
+    <view class="stats-header">
+      <text class="stats-title">📊 美丽统计</text>
+    </view>
+    <view class="stats-grid">
+      <view class="stat-item">
+        <text class="stat-number">{{totalProducts}}</text>
+        <text class="stat-label">总产品数</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-number {{expiringSoon > 0 ? 'warning' : ''}}">{{expiringSoon}}</text>
+        <text class="stat-label">即将过期</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-number">{{categoriesCount}}</text>
+        <text class="stat-label">品类数量</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{totalProducts === 0}}">
+    <view class="empty-icon">💝</view>
+    <text class="empty-title">还没有化妆品记录</text>
+    <text class="empty-desc">开始记录您的第一件化妆品吧</text>
+    <button class="empty-btn" bindtap="navigateToAdd">✨ 添加第一个产品</button>
+  </view>
+</view>

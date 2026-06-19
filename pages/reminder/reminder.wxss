@@ -4,28 +4,207 @@
   min-height: 100vh;
 }
 
+.page-header {
+  padding: 40rpx 40rpx 20rpx;
+  background: white;
+  border-radius: 0 0 30rpx 30rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.08);
+  margin-bottom: 30rpx;
+}
+
+.page-title {
+  display: block;
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10rpx;
+}
+
+.page-subtitle {
+  display: block;
+  font-size: 28rpx;
+  color: #666;
+}
+
 .reminder-card {
   background: white;
   border-radius: 20rpx;
   padding: 30rpx;
   margin-bottom: 30rpx;
   box-shadow: 0 5rpx 15rpx rgba(255, 117, 127, 0.1);
+  border-left: 8rpx solid #ffb6c1;
+  transition: all 0.3s ease;
+}
+
+.reminder-card:active {
+  transform: translateY(-4rpx);
+  box-shadow: 0 8rpx 20rpx rgba(255, 117, 127, 0.2);
 }
 
 .reminder-card.urgent {
   background: #fff0f5;
-  border-left: 8rpx solid #ff757f;
+  border-left-color: #ff757f;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+.product-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20rpx;
+}
+
+.brand {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.category {
+  font-size: 24rpx;
+  color: #666;
+  background: #f8f9fa;
+  padding: 4rpx 12rpx;
+  border-radius: 12rpx;
+  display: inline-block;
+}
+
+.days-left {
+  font-size: 32rpx;
+  font-weight: bold;
+  padding: 8rpx 16rpx;
+  border-radius: 15rpx;
+  background: #f8f9fa;
+}
+
+.days-left.urgent {
+  color: #ff4757;
+  background: #fff5f5;
+  animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
 }
 
 .product-name {
   color: #ff757f;
-  font-size: 32rpx;
+  font-size: 28rpx;
   margin-bottom: 15rpx;
+  display: block;
+  font-weight: 600;
 }
 
 .reminder-info {
   display: flex;
+  flex-direction: column;
+  gap: 15rpx;
+}
+
+.info-item {
+  display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding: 15rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.info-item:last-child {
+  border-bottom: none;
+}
+
+.info-item text {
+  font-size: 26rpx;
   color: #666;
+}
+
+.info-item text:last-child {
+  font-weight: bold;
+  color: #ff69b4;
+}
+
+/* 紧急提醒的特殊样式 */
+.urgent .product-name {
+  color: #ff4757;
+  font-weight: bold;
+}
+
+.urgent .info-item text:last-child {
+  color: #ff4757;
+}
+
+/* 过期产品的样式 */
+.expired {
+  background: #fff5f5;
+  border-left-color: #ff6b6b;
+}
+
+.expired .product-name {
+  color: #ff6b6b;
+  text-decoration: line-through;
+}
+
+.expired .info-item text:last-child {
+  color: #ff6b6b;
+}
+
+.expired .days-left {
+  color: #ff6b6b;
+  background: #fff5f5;
+}
+
+/* 空状态样式 */
+.empty-reminder {
+  text-align: center;
+  padding: 100rpx 40rpx;
+  background: white;
+  border-radius: 25rpx;
+  margin-top: 40rpx;
+  box-shadow: 0 8rpx 30rpx rgba(255, 182, 193, 0.2);
+}
+
+.empty-icon {
+  font-size: 120rpx;
+  display: block;
+  margin-bottom: 30rpx;
+}
+
+.empty-title {
+  display: block;
+  font-size: 36rpx;
+  color: #333;
+  margin-bottom: 20rpx;
+  font-weight: bold;
+}
+
+.empty-desc {
+  display: block;
   font-size: 28rpx;
+  color: #666;
+  margin-bottom: 50rpx;
+}
+
+.empty-btn {
+  display: inline-block;
+  padding: 25rpx 50rpx;
+  background: linear-gradient(135deg, #ff9ecb, #ff69b4);
+  color: white;
+  border-radius: 35rpx;
+  font-size: 30rpx;
+  box-shadow: 0 8rpx 25rpx rgba(255, 105, 180, 0.3);
+  border: none;
+}
+
+.empty-btn:active {
+  transform: scale(0.98);
 }

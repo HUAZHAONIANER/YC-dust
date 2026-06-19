@@ -1,0 +1,393 @@
+.health-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f0fff0 0%, #e0ffe0 100%);
+  padding: 40rpx;
+}
+
+.header-section {
+  text-align: center;
+  margin-bottom: 80rpx;
+  padding: 20rpx 0;
+}
+
+.page-title {
+  font-size: 42rpx;
+  color: #333;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 15rpx;
+}
+
+.page-subtitle {
+  font-size: 26rpx;
+  color: #666;
+  display: block;
+}
+
+.tab-bar {
+  display: flex;
+  background: white;
+  border-radius: 25rpx;
+  padding: 10rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 15rpx rgba(152, 251, 152, 0.3);
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx;
+  border-radius: 20rpx;
+  font-size: 28rpx;
+  color: #666;
+  transition: all 0.3s ease;
+}
+
+.tab-item.active {
+  background: linear-gradient(135deg, #98fb98, #87ceeb);
+  color: white;
+  font-weight: bold;
+}
+
+.form-card {
+  background: white;
+  border-radius: 25rpx;
+  padding: 40rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 8rpx 30rpx rgba(152, 251, 152, 0.2);
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30rpx;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 40rpx;
+}
+
+.form-label {
+  display: block;
+  color: #333;
+  font-size: 28rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+}
+
+.form-input, .picker-text {
+  width: 100%;
+  padding: 25rpx 0;
+  border-bottom: 3rpx solid #f0f0f0;
+  font-size: 28rpx;
+  color: #333;
+  transition: border-color 0.3s ease;
+}
+
+.form-input:focus, .picker-text:focus {
+  border-bottom-color: #98fb98;
+}
+
+.picker-text {
+  color: #999;
+}
+
+.picker-text.has-value {
+  color: #333;
+}
+
+.note-input {
+  width: 100%;
+  height: 120rpx;
+  padding: 20rpx;
+  border: 3rpx solid #f0f0f0;
+  border-radius: 15rpx;
+  font-size: 28rpx;
+  background: #fafafa;
+  box-sizing: border-box;
+}
+
+.save-btn {
+  height: 80rpx;
+  background: linear-gradient(135deg, #98fb98, #87ceeb);
+  color: white;
+  border-radius: 50rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-top: 20rpx;
+  border: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 10rpx 30rpx rgba(152, 251, 152, 0.3);
+}
+
+.bmi-result {
+  margin-top: 30rpx;
+}
+
+.result-card {
+  background: linear-gradient(135deg, #f8fff8, #f0fff0);
+  border-radius: 20rpx;
+  padding: 40rpx;
+  text-align: center;
+  border: 3rpx solid #98fb98;
+}
+
+.result-title {
+  display: block;
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 20rpx;
+}
+
+.bmi-value {
+  display: block;
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #ff69b4;
+  margin-bottom: 15rpx;
+}
+
+.bmi-status {
+  display: block;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.period-result {
+  margin: 30rpx 0;
+}
+
+.result-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20rpx;
+}
+
+.result-item {
+  background: #f8fff8;
+  border-radius: 15rpx;
+  padding: 25rpx;
+  text-align: center;
+  border: 2rpx solid #98fb98;
+}
+
+.result-label {
+  display: block;
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+}
+
+.result-value {
+  display: block;
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.stats-section {
+  background: white;
+  border-radius: 25rpx;
+  padding: 35rpx 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 8rpx 30rpx rgba(152, 251, 152, 0.2);
+}
+
+.stats-grid {
+  display: flex;
+  justify-content: space-around;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-number {
+  font-size: 42rpx;
+  font-weight: bold;
+  color: #98fb98;
+  margin-bottom: 10rpx;
+}
+
+.stat-label {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.history-section {
+  background: white;
+  border-radius: 25rpx;
+  padding: 35rpx 30rpx;
+  box-shadow: 0 8rpx 30rpx rgba(152, 251, 152, 0.2);
+}
+
+.records-list {
+  max-height: 600rpx;
+}
+
+.record-card {
+  background: #f8fff8;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  border: 2rpx solid #e8f8e8;
+}
+
+.record-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.record-date {
+  font-size: 26rpx;
+  color: #666;
+  font-weight: bold;
+}
+
+.delete-btn {
+  color: #ff6b6b;
+  font-size: 28rpx;
+}
+
+.record-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15rpx;
+}
+
+.record-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bmi-display {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #ff69b4;
+}
+
+.status-tag {
+  color: white;
+  padding: 8rpx 16rpx;
+  border-radius: 15rpx;
+  font-size: 22rpx;
+  font-weight: bold;
+  background: #51cf66;
+}
+
+.milktea-brand {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.milktea-size {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.milktea-name {
+  font-size: 26rpx;
+  color: #ff69b4;
+}
+
+.milktea-note {
+  font-size: 24rpx;
+  color: #999;
+  font-style: italic;
+}
+
+/* 图表相关样式 */
+.chart-controls {
+  background: white;
+  border-radius: 25rpx;
+  padding: 35rpx 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 8rpx 30rpx rgba(152, 251, 152, 0.2);
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25rpx;
+}
+
+.chart-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.chart-toggle {
+  color: #98fb98;
+  font-size: 26rpx;
+  padding: 10rpx 20rpx;
+  border: 2rpx solid #98fb98;
+  border-radius: 20rpx;
+}
+
+.chart-type-selector {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30rpx;
+  padding: 20rpx;
+  background: #f8fff8;
+  border-radius: 15rpx;
+}
+
+.chart-type-label {
+  font-size: 26rpx;
+  color: #666;
+  margin-right: 20rpx;
+}
+
+.chart-type-buttons {
+  display: flex;
+  gap: 15rpx;
+}
+
+.chart-type-btn {
+  padding: 12rpx 24rpx;
+  background: #f0f0f0;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  color: #666;
+  transition: all 0.3s ease;
+}
+
+.chart-type-btn.active {
+  background: #98fb98;
+  color: white;
+  font-weight: bold;
+}
+
+.chart-container {
+  margin-bottom: 40rpx;
+  padding: 25rpx;
+  background: #f8fff8;
+  border-radius: 15rpx;
+}
+
+.chart-subtitle {
+  display: block;
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+  text-align: center;
+}
+
+.health-chart {
+  width: 100%;
+  height: 300rpx;
+  background: white;
+  border-radius: 10rpx;
+}

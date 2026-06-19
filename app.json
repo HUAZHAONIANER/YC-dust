@@ -1,14 +1,55 @@
 {
   "pages": [
-    "pages/index/index",
+    "pages/cosmetics/cosmetics",
+    "pages/wardrobe/wardrobe",
+    "pages/health/health",
+    "pages/finance/finance",
     "pages/add/add",
     "pages/history/history",
-    "pages/reminder/reminder"
+    "pages/reminder/reminder",
+    "pages/wardrobe/add",
+    "pages/wardrobe/history"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#E6B0AA",
-    "navigationBarTitleText": "化妆品管理",
-    "navigationBarTextStyle": "white"
-  }
+    "navigationBarBackgroundColor": "#FFB6C1",
+    "navigationBarTitleText": "扬尘",
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": false
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#FF69B4",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/cosmetics/cosmetics",
+        "iconPath": "images/cosmetics.png",
+        "selectedIconPath": "images/cosmetics-active.png",
+        "text": "化妆品管理"
+      },
+      {
+        "pagePath": "pages/wardrobe/wardrobe",
+        "iconPath": "images/wardrobe.png",
+        "selectedIconPath": "images/wardrobe-active.png",
+        "text": "衣橱管理"
+      },
+      {
+        "pagePath": "pages/health/health",
+        "iconPath": "images/health.png",
+        "selectedIconPath": "images/health-active.png",
+        "text": "健康管理"
+      },
+      {
+        "pagePath": "pages/finance/finance",
+        "iconPath": "images/finance.png",
+        "selectedIconPath": "images/finance-active.png",
+        "text": "财务管理"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
 }

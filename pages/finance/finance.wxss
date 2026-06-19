@@ -1,0 +1,483 @@
+.finance-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f0f8ff 0%, #e0f0ff 100%);
+  padding: 30rpx;
+}
+
+.header-section {
+  text-align: center;
+  margin-bottom: 30rpx;
+  padding: 20rpx 0;
+}
+
+.page-title {
+  font-size: 42rpx;
+  color: #333;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 15rpx;
+  text-align: center;
+}
+
+.page-subtitle {
+  font-size: 26rpx;
+  color: #666;
+  display: block;
+  text-align: center;
+}
+
+.tab-bar {
+  display: flex;
+  background: white;
+  border-radius: 25rpx;
+  padding: 10rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 15rpx rgba(135, 206, 250, 0.3);
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx;
+  border-radius: 20rpx;
+  font-size: 28rpx;
+  color: #666;
+  transition: all 0.3s ease;
+}
+
+.tab-item.active {
+  background: linear-gradient(135deg, #87cefa, #6495ed);
+  color: white;
+  font-weight: bold;
+}
+
+.form-card {
+  background: white;
+  border-radius: 25rpx;
+  padding: 40rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 8rpx 30rpx rgba(135, 206, 250, 0.2);
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30rpx;
+  text-align: center;
+}
+
+.type-switch {
+  display: flex;
+  background: #f8f9fa;
+  border-radius: 20rpx;
+  padding: 8rpx;
+  margin-bottom: 40rpx;
+}
+
+.type-btn {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx;
+  border-radius: 15rpx;
+  font-size: 28rpx;
+  color: #666;
+  transition: all 0.3s ease;
+}
+
+.type-btn.active.income {
+  background: linear-gradient(135deg, #51cf66, #40c057);
+  color: white;
+  font-weight: bold;
+}
+
+.type-btn.active.expense {
+  background: linear-gradient(135deg, #ff6b6b, #fa5252);
+  color: white;
+  font-weight: bold;
+}
+
+.form-group {
+  margin-bottom: 40rpx;
+}
+
+.form-label {
+  display: block;
+  color: #333;
+  font-size: 28rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+}
+
+.form-input, .picker-text {
+  width: 100%;
+  padding: 25rpx 0;
+  border-bottom: 3rpx solid #f0f0f0;
+  font-size: 28rpx;
+  color: #333;
+  transition: border-color 0.3s ease;
+}
+
+.form-input:focus, .picker-text:focus {
+  border-bottom-color: #87cefa;
+}
+
+.picker-text {
+  color: #999;
+}
+
+.picker-text.has-value {
+  color: #333;
+}
+
+.note-input {
+  width: 100%;
+  height: 120rpx;
+  padding: 20rpx;
+  border: 3rpx solid #f0f0f0;
+  border-radius: 15rpx;
+  font-size: 28rpx;
+  background: #fafafa;
+  box-sizing: border-box;
+}
+
+.save-btn {
+  height: 80rpx;
+  background: linear-gradient(135deg, #87cefa, #6495ed);
+  color: white;
+  border-radius: 50rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-top: 20rpx;
+  border: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 10rpx 30rpx rgba(135, 206, 250, 0.3);
+}
+
+.btn-hover {
+  opacity: 0.9;
+  transform: translateY(-2rpx);
+}
+
+.history-section {
+  background: white;
+  border-radius: 25rpx;
+  padding: 35rpx 30rpx;
+  box-shadow: 0 8rpx 30rpx rgba(135, 206, 250, 0.2);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 20rpx;
+}
+
+.action-btn {
+  font-size: 24rpx;
+  color: #87cefa;
+  padding: 10rpx 20rpx;
+  border: 2rpx solid #87cefa;
+  border-radius: 15rpx;
+}
+
+.records-list {
+  max-height: 600rpx;
+}
+
+.record-card {
+  background: #f8f9fa;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+  border-left: 6rpx solid #87cefa;
+  transition: all 0.3s ease;
+}
+
+.record-card:active {
+  transform: translateY(-2rpx);
+  box-shadow: 0 4rpx 15rpx rgba(135, 206, 250, 0.3);
+}
+
+.record-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.record-type {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+}
+
+.record-type.income .type-icon {
+  color: #51cf66;
+}
+
+.record-type.expense .type-icon {
+  color: #ff6b6b;
+}
+
+.type-text {
+  font-size: 26rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.record-amount {
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.record-amount.income {
+  color: #51cf66;
+}
+
+.record-amount.expense {
+  color: #ff6b6b;
+}
+
+.record-content {
+  margin-bottom: 20rpx;
+}
+
+.record-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+
+.record-category {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.record-date {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.record-note {
+  font-size: 26rpx;
+  color: #999;
+  font-style: italic;
+}
+
+.record-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1rpx solid #e9ecef;
+  padding-top: 15rpx;
+}
+
+.record-time {
+  font-size: 22rpx;
+  color: #999;
+}
+
+.delete-btn {
+  color: #ff6b6b;
+  font-size: 28rpx;
+}
+
+.filter-section {
+  display: flex;
+  gap: 20rpx;
+  margin-bottom: 30rpx;
+}
+
+.filter-group {
+  flex: 1;
+  background: white;
+  border-radius: 15rpx;
+  padding: 20rpx;
+  box-shadow: 0 4rpx 15rpx rgba(135, 206, 250, 0.2);
+}
+
+.filter-label {
+  display: block;
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+}
+
+.filter-picker {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bold;
+  text-align: center;
+  padding: 15rpx;
+  background: #f8f9fa;
+  border-radius: 10rpx;
+}
+
+.stats-overview {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20rpx;
+  margin-bottom: 30rpx;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  text-align: center;
+  box-shadow: 0 4rpx 15rpx rgba(135, 206, 250, 0.2);
+}
+
+.stat-card.income {
+  border-top: 6rpx solid #51cf66;
+}
+
+.stat-card.expense {
+  border-top: 6rpx solid #ff6b6b;
+}
+
+.stat-card.balance {
+  border-top: 6rpx solid #87cefa;
+}
+
+.stat-label {
+  display: block;
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 15rpx;
+}
+
+.stat-value {
+  display: block;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.stat-value.positive {
+  color: #51cf66;
+}
+
+.stat-value.negative {
+  color: #ff6b6b;
+}
+
+.yearly-stats {
+  background: white;
+  border-radius: 25rpx;
+  padding: 35rpx 30rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 8rpx 30rpx rgba(135, 206, 250, 0.2);
+}
+
+.yearly-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20rpx;
+}
+
+.yearly-item {
+  text-align: center;
+  padding: 25rpx;
+  background: #f8f9fa;
+  border-radius: 15rpx;
+}
+
+.yearly-label {
+  display: block;
+  font-size: 24rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+}
+
+.yearly-value {
+  display: block;
+  font-size: 28rpx;
+  font-weight: bold;
+}
+
+.yearly-value.income {
+  color: #51cf66;
+}
+
+.yearly-value.expense {
+  color: #ff6b6b;
+}
+
+.yearly-value.positive {
+  color: #51cf66;
+}
+
+.yearly-value.negative {
+  color: #ff6b6b;
+}
+
+.category-stats {
+  background: white;
+  border-radius: 25rpx;
+  padding: 35rpx 30rpx;
+  box-shadow: 0 8rpx 30rpx rgba(135, 206, 250, 0.2);
+}
+
+.category-section {
+  margin-bottom: 40rpx;
+}
+
+.category-section:last-child {
+  margin-bottom: 0;
+}
+
+.category-type {
+  display: block;
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 25rpx;
+  padding-bottom: 15rpx;
+  border-bottom: 2rpx solid #f0f0f0;
+}
+
+.category-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.category-item {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.category-name {
+  flex: 1;
+  font-size: 26rpx;
+  color: #333;
+  min-width: 120rpx;
+}
+
+.category-amount {
+  flex: 1;
+  font-size: 24rpx;
+  color: #666;
+  text-align: right;
+  min-width: 120rpx;
+}
+
+.no-data {
+  text-align: center;
+  padding: 40rpx;
+}
+
+.no-data-text {
+  font-size: 28rpx;
+  color: #999;
+}
